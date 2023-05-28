@@ -1,14 +1,27 @@
 <template>
   <div class="list-item">
     <div class="left">
-      <input type="checkbox" class="checkbox" />
+      <input type="checkbox" class="checkbox" :checked="checked" @click="changeStatus(id)" />
     </div>
-    <div class="right">123123123</div>
+    <div class="right">{{ props.listItem }}</div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, toRefs } from 'vue'
+import { useListDataStore } from '../../store/list'
+
+const props = defineProps({
+  id: { type: Number, required: true },
+  listItem: { type: String, required: true },
+  checked: { type: Boolean, required: true }
+})
+
+let { checked } = props
+
+const listDataStore = useListDataStore()
+const changeStatus = (id: number) => {
+  listDataStore.changeStatus(id)
+}
 </script>
 
 <style lang="less" scoped>
