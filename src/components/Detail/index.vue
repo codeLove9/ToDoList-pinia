@@ -1,13 +1,14 @@
 <template>
   <div class="detail">
-    <div class="item">todo：3</div>
-    <div class="item">finished：5</div>
-    <div class="item">total：8</div>
+    <div class="item">todo：{{ todo }}</div>
+    <div class="item">finished：{{ finished }}</div>
+    <div class="item">total：{{ total }}</div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, toRefs } from 'vue'
+import { useDetailsDataStore } from '../../store/details'
+const { todo, finished, total } = useDetailsDataStore()
 </script>
 
 <style lang="less" scoped>
