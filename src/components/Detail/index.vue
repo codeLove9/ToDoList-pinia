@@ -1,14 +1,14 @@
 <template>
   <div class="detail">
-    <div class="item">todo：{{ todo }}</div>
-    <div class="item">finished：{{ finished }}</div>
-    <div class="item">total：{{ total }}</div>
+    <div class="item">todo：{{ listDataStore.todo }}</div>
+    <div class="item">finished：{{ listDataStore.finished }}</div>
+    <div class="item">total：{{ listDataStore.total }}</div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useDetailsDataStore } from '../../store/details'
-const { todo, finished, total } = useDetailsDataStore()
+import { useListDataStore } from '../../store/list'
+const listDataStore = useListDataStore()
 </script>
 
 <style lang="less" scoped>

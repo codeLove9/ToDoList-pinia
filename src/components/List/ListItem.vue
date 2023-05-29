@@ -16,8 +16,6 @@ const props = defineProps({
   checked: { type: Boolean, required: true }
 })
 
-let { checked } = props
-
 const listDataStore = useListDataStore()
 const changeStatus = (id: number) => {
   listDataStore.changeStatus(id)
