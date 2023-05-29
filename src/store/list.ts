@@ -24,6 +24,9 @@ export const useListDataStore = defineStore('listData', {
         item.id === id ? (item.checked = !item.checked) : ''
         return item
       })
+    },
+    addList(val: { id: number; todo: string; checked: boolean }) {
+      this.listData.push(val)
     }
   },
   getters: {
