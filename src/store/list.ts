@@ -2,11 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useListDataStore = defineStore('listData', {
   state: (): {
-    listData: {
-      id: number
-      todo: string
-      checked: boolean
-    }[]
+    listData: List
   } => {
     return {
       listData: [
@@ -25,8 +21,11 @@ export const useListDataStore = defineStore('listData', {
         return item
       })
     },
-    addList(val: { id: number; todo: string; checked: boolean }) {
-      this.listData.push(val)
+    addList(val: listItemItf) {
+      this.listData.unshift(val)
+    },
+    deleteList(id: number) {
+      this.listData = this.listData.filter(item => item.id !== id)
     }
   },
   getters: {
@@ -34,7 +33,7 @@ export const useListDataStore = defineStore('listData', {
       return state.listData.length
     },
     todo(state) {
-      return state.listData.filter((item: { id: number; todo: string; checked: boolean }) => item.checked === false).length
+      return state.listData.filter((item: listItemItf) => item.checked === false).length
     },
     finished() {
       // 强转解决类型报错
@@ -43,35 +42,3 @@ export const useListDataStore = defineStore('listData', {
     }
   }
 })
-
-/* export const useListDataStore = defineStore('listData', () => {
-  const state: {
-    listData: {
-      id: number
-      todo: string
-      checked: boolean
-    }[]
-  } = reactive({
-    listData: [
-      { id: 1, todo: '学习pinia', checked: true },
-      { id: 2, todo: '学习uniapp', checked: true },
-      { id: 3, todo: '学习Java', checked: false },
-      { id: 4, todo: '学习react', checked: true },
-      { id: 5, todo: '学习three.js', checked: false }
-    ]
-  })
-
-  let { listData } = toRefs(state)
-
-  const changeStatus = (id: number) => {
-    listData.value = listData.value.map((item: { id: number; todo: string; checked: boolean }) => {
-      item.id === id ? (item.checked = !item.checked) : ''
-      return item
-    })
-  }
-
-  return {
-    listData,
-    changeStatus
-  }
-}) */
